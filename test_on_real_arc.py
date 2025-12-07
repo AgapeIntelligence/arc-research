@@ -75,3 +75,29 @@ from ethical_eval import ethical_score
 base_solver = MockBaseSolver()
 hopf_solver = HopfAugmenter(base_solver, phases=24)
 
+
+# ===================================================================
+# Section 6: Evaluation Loop
+# ===================================================================
+solved = 0
+ethical_scores = []
+
+for i, task in enumerate(tasks):
+    try:
+        pred, ethics = hopf_solver.solve_task(task)
+
+        correct = any(
+            np.array_equal(np.array(pred), np.array(test["output"]))
+            for test in task["test"]
+        )
+        if correct:
+            solved += 1
+
+        ethical_scores.append(ethics["ethical_score"])
+
+        if (i+1) % 5 == 0 or (i+1) == len(tasks):
+            print(f"Processed {i+1}/{len(tasks)} | Current solve rate: {solved/(i+1):.1%}")
+
+    except Exception as e:
+        print(f"Task {i} failed: {e}")
+
