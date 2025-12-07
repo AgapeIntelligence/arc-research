@@ -14,3 +14,14 @@ MOCK_TASKS = {
 tasks = [{"test": [MOCK_TASKS[key]]} for key in MOCK_TASKS]
 
 print("Loaded mock tasks:", list(MOCK_TASKS.keys()))
+"""
+Section 4: Mock Base Solver (~71% accuracy)
+"""
+import numpy as np
+
+class MockBaseSolver:
+    def solve_with_hint(self, grid, hint):
+        arr = np.array(grid)
+        if np.random.rand() < 0.71:
+            return arr.tolist()
+        return np.rot90(arr, k=np.random.randint(1,4)).tolist()
