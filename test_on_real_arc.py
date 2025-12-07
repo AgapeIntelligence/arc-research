@@ -107,3 +107,16 @@ if not DATA_PATH.exists():
     else:
         # Load the 400 tasks into memory
         tasks = []
+        with open(DATA_PATH, "r", encoding="utf-8") as f:
+            for line in f:
+                if line.strip():
+                    tasks.append(json.loads(line))
+        print(f"Loaded {len(tasks)} real ARC-AGI-2 public training tasks")
+else:
+    # Load existing file
+    tasks = []
+    with open(DATA_PATH, "r", encoding="utf-8") as f:
+        for line in f:
+            if line.strip():
+                tasks.append(json.loads(line))
+    print(f"Loaded {len(tasks)} real ARC-AGI-2 public training tasks")
