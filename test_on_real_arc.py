@@ -54,3 +54,14 @@ else:
                 tasks.append(json.loads(line))
     print(f"Loaded {len(tasks)} real ARC-AGI-2 public training tasks")
 
+
+# ===================================================================
+# Section 4: Mock Base Solver (replace with real 71% model)
+# ===================================================================
+class MockBaseSolver:
+    def solve_with_hint(self, grid, hint):
+        arr = np.array(grid)
+        if np.random.rand() < 0.71:
+            return arr.tolist()
+        return np.rot90(arr, k=np.random.randint(1,4)).tolist()
+
