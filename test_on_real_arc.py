@@ -30,7 +30,6 @@ for i, task in enumerate(tasks):
         
         ethical_scores.append(ethics["ethical_score"])
 
-cat > test_on_real_arc.py << 'EOF'
 """
 test_on_real_arc.py
 Runs the Hopf-Augmented + Ethical pipeline on ARC-AGI-2 or mock tasks.
@@ -141,3 +140,14 @@ print(f"vs Baseline:     ~71% → +{solve_rate*100 - 71:.1f}% uplift")
 print(f"Avg Ethical:     {avg_ethical:.3f}")
 print(f"Projected Private: 82–85% (with real 400 tasks)")
 print("="*70)
+    except urllib.error.HTTPError as e:
+        print(f"Download failed with error: {e}. Using mock data instead.")
+        # Mock data fallback (5 tasks for testing)
+        tasks = [
+            {"test": [{"input": [[1, 0], [0, 1]], "output": [[1, 0], [0, 1]]}]},
+            {"test": [{"input": [[0, 1], [1, 0]], "output": [[0, 1], [1, 0]]}]},
+            {"test": [{"input": [[1, 1], [1, 1]], "output": [[1, 1], [1, 1]]}]},
+            {"test": [{"input": [[2, 0], [0, 2]], "output": [[2, 0], [0, 2]]}]},
+            {"test": [{"input": [[0, 2], [2, 0]], "output": [[0, 2], [2, 0]]}]},
+        ]
+        print("Loaded 5 mock tasks for testing.")
