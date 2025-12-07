@@ -92,3 +92,5 @@ if not DATA_PATH.exists():
     try:
         print("Downloading official ARC-AGI-2 training set (400 tasks)...")
         urllib.request.urlretrieve(DATA_URL, DATA_PATH)
+        print("Download complete.")
+    except urllib.error.HTTPError as e:
