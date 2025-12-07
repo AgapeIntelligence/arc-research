@@ -157,3 +157,12 @@ from hopf_solver_optimized import HopfAugmenter
 from ethical_eval import ethical_score
 base_solver = MockBaseSolver()
 hopf_solver = HopfAugmenter(base_solver, phases=24)
+# ===========================================================================
+# Section 5: Evaluation Loop
+# ===========================================================================
+# Run evaluation on all 400 tasks
+solved = 0
+ethical_scores = []
+
+for i, task in enumerate(tasks):
+    try:
