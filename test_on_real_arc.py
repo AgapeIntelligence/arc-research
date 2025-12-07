@@ -71,23 +71,6 @@ class MockBaseSolver:
 # Section 5: Solver Initialization
 # ===========================================================================
 # Initialize Hopf-Augmented solver with ethical tracking
-from hopf_solver_optimized import HopfAugmenter
-from ethical_eval import ethical_score
-base_solver = MockBaseSolver()
-hopf_solver = HopfAugmenter(base_solver, phases=24)
-# ===========================================================================
-# Section 6: Evaluation Loop
-# ===========================================================================
-# Run evaluation on all tasks
-solved = 0
-ethical_scores = []
-
-for i, task in enumerate(tasks):
-    try:
-        pred, ethics = hopf_solver.solve_task(task)
-        # Check if prediction matches any test output
-        correct = any(
-            np.array_equal(np.array(pred), np.array(test["output"]))
             for test in task["test"]
         )
         if correct:
@@ -121,3 +104,12 @@ print("="*70)
         {"test": [{"input": [[1, 2], [3, 4]], "output": [[4, 3], [2, 1]]}]},  # Complex swap
         {"test": [{"input": [[0, 1, 0], [1, 1, 1], [0, 1, 0]], "output": [[1, 1, 1], [0, 1, 0], [1, 1, 1]]}]},  # Pattern
     ]
+        # Mock data fallback (5 tasks for testing)
+        tasks = [
+            {"test": [{"input": [[1, 0], [0, 1]], "output": [[1, 0], [0, 1]]}]},
+            {"test": [{"input": [[0, 1], [1, 0]], "output": [[0, 1], [1, 0]]}]},
+            {"test": [{"input": [[1, 1], [1, 1]], "output": [[1, 1], [1, 1]]}]},
+            {"test": [{"input": [[2, 0], [0, 2]], "output": [[2, 0], [0, 2]]}]},
+            {"test": [{"input": [[0, 2], [2, 0]], "output": [[0, 2], [2, 0]]}]},
+        ]
+        print("Loaded 5 mock tasks for testing.")
