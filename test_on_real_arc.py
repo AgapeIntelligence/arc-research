@@ -33,3 +33,9 @@ import numpy as np
 from pathlib import Path
 import urllib.request
 import ssl
+# Disable SSL verification for GitHub raw links
+ssl._create_default_https_context = ssl._create_unverified_context
+
+# Define data source and local path
+DATA_URL = "https://github.com/arcprize/ARC-AGI-2/raw/main/data/training/training.jsonl"
+DATA_PATH = Path("arc_training.jsonl")
