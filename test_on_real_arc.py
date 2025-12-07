@@ -94,3 +94,12 @@ class MockBaseSolver:
         if np.random.rand() < 0.71:
             return arr.tolist()
         return np.rot90(arr, k=np.random.randint(1,4)).tolist()
+
+# ===================================================================
+# Section 4: Hopf-Augmented + Ethical Solver Initialization
+# ===================================================================
+from hopf_solver_optimized import HopfAugmenter
+from ethical_eval import ethical_score
+
+base_solver = MockBaseSolver()
+hopf_solver = HopfAugmenter(base_solver, phases=24)
