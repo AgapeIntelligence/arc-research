@@ -122,3 +122,19 @@ ssl._create_default_https_context = ssl._create_unverified_context
 # Define data source and local path
 DATA_URL = "https://github.com/fchollet/ARC-AGI/raw/master/data/training/training.jsonl"
 DATA_PATH = Path("arc_training.jsonl")
+# ===========================================================================
+# Section 2: Data Download and Loading
+# ===========================================================================
+if not DATA_PATH.exists():
+    print("Downloading official ARC-AGI-2 training set (400 tasks)...")
+    urllib.request.urlretrieve(DATA_URL, DATA_PATH)
+    print("Download complete.")
+
+# Load the 400 tasks into memory
+tasks = []
+with open(DATA_PATH, "r", encoding="utf-8") as f:
+    for line in f:
+        if line.strip():
+            tasks.append(json.loads(line))
+
+print(f"Loaded {len(tasks)} real ARC-AGI-2 public training tasks")
