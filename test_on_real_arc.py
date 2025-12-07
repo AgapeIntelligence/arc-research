@@ -31,3 +31,11 @@ if not DATA_PATH.exists():
         print("Download complete.")
     except urllib.error.HTTPError as e:
         print(f"Download failed with error: {e}. Using mock data instead.")
+        # Mock data fallback (5 tasks for testing)
+        tasks = [
+            {"test": [{"input": [[1, 0], [0, 1]], "output": [[1, 0], [0, 1]]}]},
+            {"test": [{"input": [[0, 1], [1, 0]], "output": [[0, 1], [1, 0]]}]},
+            {"test": [{"input": [[1, 1], [1, 1]], "output": [[1, 1], [1, 1]]}]},
+            {"test": [{"input": [[2, 0], [0, 2]], "output": [[2, 0], [0, 2]]}]},
+            {"test": [{"input": [[0, 2], [2, 0]], "output": [[0, 2], [2, 0]]}]},
+        ]
