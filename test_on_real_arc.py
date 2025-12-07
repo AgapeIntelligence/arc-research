@@ -138,3 +138,14 @@ with open(DATA_PATH, "r", encoding="utf-8") as f:
             tasks.append(json.loads(line))
 
 print(f"Loaded {len(tasks)} real ARC-AGI-2 public training tasks")
+# ===========================================================================
+# Section 3: Mock Base Solver Definition
+# ===========================================================================
+# Mock base solver (replace with your real 71% model)
+class MockBaseSolver:
+    def solve_with_hint(self, grid, hint):
+        arr = np.array(grid)
+        # Simulate ~71% accuracy with random rotations
+        if np.random.rand() < 0.71:
+            return arr.tolist()
+        return np.rot90(arr, k=np.random.randint(1, 4)).tolist()
