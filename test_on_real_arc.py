@@ -103,3 +103,7 @@ if not DATA_PATH.exists():
             {"test": [{"input": [[2, 0], [0, 2]], "output": [[2, 0], [0, 2]]}]},
             {"test": [{"input": [[0, 2], [2, 0]], "output": [[0, 2], [2, 0]]}]},
         ]
+        print("Loaded 5 mock tasks for testing.")
+    else:
+        # Load the 400 tasks into memory
+        tasks = []
