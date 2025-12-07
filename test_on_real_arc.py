@@ -51,3 +51,36 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 DATA_URL = "https://github.com/arcprize/ARC-AGI-2/raw/main/data/training/training.jsonl"
 DATA_PATH = Path("arc_training.jsonl")
+
+# ===================================================================
+# Section 2: Data Download and Loading
+# ===================================================================
+if not DATA_PATH.exists():
+    try:
+        print("Downloading ARC-AGI-2 training set...")
+        urllib.request.urlretrieve(DATA_URL, DATA_PATH)
+        print("Download complete.")
+    except urllib.error.HTTPError:
+        # Mock fallback
+        tasks = [
+            {"name":"rotation", "test":[{"input":[[1,0],[0,1]], "output":[[0,1],[1,0]]}]},
+            {"name":"flip", "test":[{"input":[[1,1],[0,0]], "output":[[0,0],[1,1]]}]},
+            {"name":"pattern", "test":[{"input":[[0,1,0],[1,1,1],[0,1,0]], "output":[[1,1,1],[0,1,0],[1,1,1]]}]},
+            {"name":"swap", "test":[{"input":[[2,0],[0,2]], "output":[[0,2],[2,0]]}]},
+            {"name":"complex_swap", "test":[{"input":[[1,2],[3,4]], "output":[[4,3],[2,1]]}]}
+        ]
+        print("Loaded mock tasks:", [t["name"] for t in tasks])
+    else:
+        tasks = []
+        with open(DATA_PATH, "r", encoding="utf-8") as f:
+            for line in f:
+                if line.strip():
+                    tasks.append(json.loads(line))
+        print(f"Loaded {len(tasks)} real tasks")
+else:
+    tasks = []
+    with open(DATA_PATH, "r", encoding="utf-8") as f:
+        for line in f:
+            if line.strip():
+                tasks.append(json.loads(line))
+    print(f"Loaded {len(tasks)} real tasks")
