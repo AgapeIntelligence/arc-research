@@ -84,3 +84,13 @@ else:
             if line.strip():
                 tasks.append(json.loads(line))
     print(f"Loaded {len(tasks)} real tasks")
+
+# ===================================================================
+# Section 3: Mock Base Solver
+# ===================================================================
+class MockBaseSolver:
+    def solve_with_hint(self, grid, hint):
+        arr = np.array(grid)
+        if np.random.rand() < 0.71:
+            return arr.tolist()
+        return np.rot90(arr, k=np.random.randint(1,4)).tolist()
