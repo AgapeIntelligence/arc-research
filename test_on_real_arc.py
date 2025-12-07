@@ -50,3 +50,12 @@ for i, task in enumerate(tasks):
         print(f"{i+1}/{len(tasks)} | Task: {task['name']} | Solved: {solved} | Ethical: {ethics['ethical_score']:.3f}")
     except Exception as e:
         print(f"Task {task['name']} failed: {e}")
+"""
+Section 7: Summary
+"""
+solve_rate = solved / len(tasks)
+avg_ethical = np.mean(ethical_scores)
+
+print("\n=== FINAL MOCK RESULTS ===")
+print(f"Solved: {solved}/{len(tasks)} ({solve_rate:.1%})")
+print(f"Avg Ethical Score: {avg_ethical:.3f}")
