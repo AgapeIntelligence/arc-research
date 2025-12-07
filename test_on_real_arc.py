@@ -166,3 +166,17 @@ ethical_scores = []
 
 for i, task in enumerate(tasks):
     try:
+        pred, ethics = hopf_solver.solve_task(task)
+        # Check if prediction matches any test output
+        correct = any(
+            np.array_equal(np.array(pred), np.array(test["output"]))
+            for test in task["test"]
+        )
+        if correct:
+            solved += 1
+        ethical_scores.append(ethics["ethical_score"])
+        
+        if (i + 1) % 50 == 0:
+            print(f"Processed {i+1}/{len(tasks)} | Current solve rate: {solved/(i+1):.1%}")
+    except Exception as e:
+        print(f"Task {i} failed: {e}")
