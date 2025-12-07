@@ -117,16 +117,3 @@ print(f"Avg Ethical:     {avg_ethical:.3f}")
 print(f"Projected Private: 82–85% (with real 400 tasks)")
 print("="*70)
 
-   ]
-   ]
-   ]
-        ]
-        # Mock data fallback (5 tasks for testing)
-        tasks = [
-            {"test": [{"input": [[1, 0], [0, 1]], "output": [[0, 1], [1, 0]]}]},  # Rotation
-            {"test": [{"input": [[1, 1], [0, 0]], "output": [[0, 0], [1, 1]]}]},  # Flip
-            {"test": [{"input": [[0, 1, 0], [1, 1, 1], [0, 1, 0]],
-                       "output": [[1, 1, 1], [0, 1, 0], [1, 1, 1]]}]},  # Pattern
-            {"test": [{"input": [[2, 0], [0, 2]], "output": [[0, 2], [2, 0]]}]},  # Swap
-            {"test": [{"input": [[1, 2], [3, 4]], "output": [[4, 3], [2, 1]]}]},  # Complex swap
-        ]
