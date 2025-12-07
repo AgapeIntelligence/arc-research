@@ -54,3 +54,5 @@ import numpy as np
 from pathlib import Path
 import urllib.request
 import ssl
+# Disable SSL verification for GitHub raw links
+ssl._create_default_https_context = ssl._create_unverified_context
